@@ -1,3 +1,4 @@
+use hex;
 use lain::{prelude::*, rand::rngs::StdRng};
 
 use crate::traits::TargetWithControl;
@@ -69,12 +70,18 @@ where
         let target = T::new();
 
         let input = target.generate_next(mutator);
-
         let res = target.run_experimental(&input);
 
-        if res.is_err() {
-            let message = format!("{:?} {:?}", input, res);
+        let errs = res.iter().filter(|r| r.is_err());
+
+        let mut is_err = false;
+        errs.for_each(|e| {
+            let message = format!("Error on input:\n\t{}\n{}", hex::encode(&input), e.as_ref().unwrap_err());
             println!("{}", &message);
+            is_err = true;
+        });
+
+        if is_err {
             return Err(());
         }
 
@@ -93,10 +100,16 @@ where
         let input = target.generate_next(mutator);
 
         let res = target.compare(&input);
+        let errs = res.iter().filter(|r| r.is_err());
 
-        if res.is_err() {
-            let message = format!("{:?} {:?}", input, res);
+        let mut is_err = false;
+        errs.for_each(|e| {
+            let message = format!("Error on input:\n\t{}\n{}", hex::encode(&input), e.as_ref().unwrap_err());
             println!("{}", &message);
+            is_err = true;
+        });
+
+        if is_err {
             return Err(());
         }
 
