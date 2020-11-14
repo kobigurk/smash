@@ -19,7 +19,7 @@ require (
 	github.com/rs/xhandler v0.0.0-20170707052532-1eb70cf1520d // indirect
 	golang.org/x/crypto v0.0.0-20201112155050-0c6587e931a9 // indirect
 	golang.org/x/net v0.0.0-20201110031124-69a78807bb2b // indirect
-	golang.org/x/sys v0.0.0-20201113221540-83cfaa298f31 // indirect
+	golang.org/x/sys v0.0.0-20201113233024-12cec1faf1ba // indirect
 	golang.org/x/text v0.3.4 // indirect
 )
 

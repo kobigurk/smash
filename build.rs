@@ -10,9 +10,11 @@ fn main() {
 
     let out_dir = env::var("OUT_DIR").unwrap();
     println!("cargo:rustc-link-search=native={}", out_dir);
+    println!("cargo:rustc-link-search=native=dep");
 
-    println!("cargo:rustc-link-lib=static=callgeth");
+//    println!("cargo:rustc-link-lib=static=callgeth");
     println!("cargo:rustc-link-lib=static=callcelo");
+    println!("cargo:rustc-link-lib=dylib=bls_snark_sys");
     Command::new("touch").args(&["build.rs"]).status().unwrap();
     Command::new("touch").args(&["make.sh"]).status().unwrap();
 }
